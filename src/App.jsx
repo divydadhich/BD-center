@@ -4,7 +4,7 @@ import BDCenter from "./pages/BDCenter";
 import Wallet from "./pages/Wallet";
 import BDMember from "./pages/BDMember";
 import AgentMember from "./pages/AgentMember";
-import MemberActions from "./pages/MemberActions";
+// import MemberActions from "./pages/MemberActions";
 import AgentMembers from "./pages/AgentMembers";
 import AgentMetricDetail from "./pages/AgentMetricDetail";
 import InviteAgent from "./pages/InviteAgent";
@@ -30,13 +30,13 @@ export default function App() {
 
         {/* ✅ AGENT METRIC DETAILS (HOST / COINS / TOTAL) */}
         <Route
-          path="/agent-members/:agentId/:type"
-          element={<AgentMetricDetail />}
-        />
+  path="/agent-members/:agentId/:type"
+  element={<AgentMetricDetail />}
+/>
 
         {/* ================= MEMBER ACTIONS ================= */}
-        <Route path="/member-actions/:id" element={<MemberActions />} />
-        <Route path="/member-actions/:id/:action" element={<MemberActions />} />
+        {/* <Route path="/member-actions/:id" element={<MemberActions />} /> */}
+        {/* <Route path="/member-actions/:id/:action" element={<MemberActions />} /> */}
 
         {/* ================= INVITE ================= */}
         <Route path="/invite-agent" element={<InviteAgent />} />

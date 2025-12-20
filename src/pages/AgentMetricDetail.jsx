@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 const agentMembers = [
   {
@@ -14,6 +15,8 @@ const agentMembers = [
 export default function AgentMetricDetail() {
   const navigate = useNavigate();
   const { agentId } = useParams();
+
+  const [hasMore, setHasMore] = useState(true);
 
   const agent = agentMembers.find((a) => a.id === agentId);
   if (!agent) return null;
@@ -91,8 +94,19 @@ export default function AgentMetricDetail() {
       </div>
 
       {/* LOAD MORE */}
-      <div className="text-center text-indigo-500 mt-10 text-sm">
-        Load more
+      <div className="text-center mt-10 text-sm">
+        {hasMore ? (
+          <button
+            onClick={() => setHasMore(false)}
+            className="text-indigo-500 font-medium active:scale-95 transition"
+          >
+            Load more
+          </button>
+        ) : (
+          <span className="text-gray-400">
+            No more data
+          </span>
+        )}
       </div>
     </div>
   );

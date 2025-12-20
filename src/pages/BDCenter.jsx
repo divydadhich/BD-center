@@ -1,89 +1,98 @@
 import { useNavigate } from "react-router-dom";
-
+import PageHeader from "../components/PageHeader";
 export default function BDCenter() {
   const nav = useNavigate();
 
   return (
-    <div className="min-h-screen bg-soft max-w-[430px] mx-auto">
+    <div className="min-h-screen max-w-[430px] mx-auto px-4 pb-10 bg-white">
 
-      {/* Header */}
-      <div className="bg-primary text-white px-4 py-4 flex items-center justify-between">
-        <span className="text-xl">←</span>
-        <h1 className="text-lg font-semibold">BD Center</h1>
-        <span className="text-xl">✕</span>
-      </div>
+      {/* HEADER */}
+ <PageHeader title="BD CENTER" />
 
-      {/* Profile Card */}
-      <div className="bg-card mx-4 mt-4 rounded-xl p-4 flex items-center gap-4 shadow">
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-white text-xl">
-          👩
+      {/* PROFILE CARD */}
+      <div className="mt-2 rounded-3xl p-4 flex items-center gap-4
+        bg-white/70 backdrop-blur-md border border-gray-200 shadow-md">
+        <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center">
+          👤
         </div>
         <div>
-          <p className="font-semibold text-gray-800">
-            PROFESSOR 🤓
-            <span className="ml-2 text-xs bg-blue-500 text-white px-2 py-[2px] rounded-full">
-              BD Leader
-            </span>
+          <p className="text-[16px] font-semibold text-gray-900">
+            BD Center
           </p>
-          <p className="text-sm text-gray-400">ID:2469315</p>
+          <p className="text-[13px] text-gray-500">
+            ID: 1
+          </p>
         </div>
       </div>
 
-      {/* Salary Cards */}
-      <div className="bg-card mx-4 mt-4 rounded-xl p-4 shadow flex justify-between">
-        <p className="text-gray-600">Total team salary for this month</p>
-        <p className="text-orange-500 font-bold">1744$</p>
+      {/* MONTHLY STATS */}
+      <div className="flex justify-between mt-6">
+        <CircleCard value="$0" label="This month" />
+        <CircleCard value="$0" label="Last month" />
       </div>
 
-      <div className="bg-card mx-4 mt-3 rounded-xl p-4 shadow flex justify-between">
-        <p className="text-gray-600">Total team salary for last month</p>
-        <p className="text-orange-500 font-bold">3789$</p>
-      </div>
-
-      {/* Wallet */}
+      {/* BALANCE CARD */}
       <div
         onClick={() => nav("/wallet")}
-        className="bg-card mx-4 mt-4 rounded-xl p-6 shadow flex items-center gap-4 active:scale-95 transition"
+        className="mt-6 rounded-3xl p-5 flex items-center justify-between
+        bg-white/70 backdrop-blur-md border border-gray-200 shadow-md
+        active:scale-95 transition"
       >
-        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center text-white text-xl">
-          💰
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl
+            bg-gradient-to-br from-blue-400 to-indigo-500
+            flex items-center justify-center text-white text-xl">
+            💼
+          </div>
+          <p className="font-medium text-gray-900">Balance</p>
         </div>
-        <p className="font-medium">Wallet</p>
+        <p className="font-semibold text-xl text-gray-900">$0</p>
       </div>
 
-      {/* Icon Grid */}
-      <div className="grid grid-cols-4 gap-4 mx-4 mt-6">
-        <Icon label="BD member" icon="👥" onClick={() => nav("/bd-member")} />
-        <Icon label="Agent member" icon="👤" onClick={() => nav("/agent-member")} />
-        <Icon label="Invite agent" icon="💌" onClick={() => nav("/invite-agent")} />
-        <Icon label="Invite BD" icon="🧑‍💼" onClick={() => nav("/invite-bd")} />
+      {/* ACTION BUTTONS */}
+      <div className="grid grid-cols-2 gap-4 mt-6">
+        <ActionCard
+          label="Agent list"
+          icon="📄"
+          onClick={() => nav("/agent-member")}
+        />
+        <ActionCard
+          label="Invite Agent"
+          icon="➕"
+          onClick={() => nav("/invite-agent")}
+        />
       </div>
-
-      {/* Settings */}
-      <div
-        onClick={() => nav("/settings")}
-        className="bg-card mx-4 mt-6 rounded-xl p-6 shadow flex items-center gap-4 active:scale-95 transition"
-      >
-        <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl">
-          ⚙️
-        </div>
-        <p className="font-medium">Settings</p>
-      </div>
-
     </div>
   );
 }
 
-function Icon({ icon, label, onClick }) {
+/* ================= COMPONENTS ================= */
+
+function CircleCard({ value, label }) {
+  return (
+    <div className="w-[150px] h-[150px] rounded-full
+      bg-white/70 backdrop-blur-md border border-gray-200 shadow-md
+      flex flex-col items-center justify-center">
+      <p className="text-3xl font-semibold text-gray-900">{value}</p>
+      <p className="text-sm text-gray-500 mt-1">{label}</p>
+    </div>
+  );
+}
+
+function ActionCard({ icon, label, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="flex flex-col items-center gap-2 active:scale-95 transition"
+      className="rounded-3xl p-5 flex items-center gap-4
+      bg-white/70 backdrop-blur-md border border-gray-200 shadow-md
+      active:scale-95 transition"
     >
-      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-xl">
+      <div className="w-12 h-12 rounded-2xl
+        bg-gradient-to-br from-blue-400 to-indigo-500
+        flex items-center justify-center text-white text-xl">
         {icon}
       </div>
-      <p className="text-xs text-center text-gray-600">{label}</p>
+      <p className="font-medium text-gray-900">{label}</p>
     </div>
   );
 }

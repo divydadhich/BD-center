@@ -2,67 +2,66 @@ import PageHeader from "../components/PageHeader";
 
 export default function Wallet() {
   return (
-    <div className="max-w-[430px] mx-auto min-h-screen bg-indigo-100">
+    <div className="max-w-[430px] mx-auto min-h-screen bg-gray-100">
 
       {/* HEADER */}
-      <PageHeader title="Wallet" />
+      <PageHeader title="Balance" />
 
-      {/* WALLET CARD */}
+      {/* BALANCE CARD */}
       <div className="px-4 mt-4">
-        <div className="relative h-44 rounded-2xl overflow-hidden text-white shadow-lg">
-
-          {/* Purple background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-purple-500 to-indigo-500" />
-
-          {/* Subtle pattern */}
-          <div className="absolute inset-0 opacity-15 text-5xl font-bold tracking-widest">
-            <div className="absolute top-6 left-4">$ B $</div>
-            <div className="absolute top-20 left-20">$ B</div>
-            <div className="absolute top-10 right-6">B $</div>
-          </div>
-
-          {/* CONTENT */}
-          <div className="relative z-10 p-5 flex justify-between">
-            <div>
-              <p className="text-sm opacity-90">Amount</p>
-              <h1 className="text-4xl font-bold mt-2">$ 0</h1>
-            </div>
-
-            <button className="text-sm font-medium opacity-90">
-              Details
-            </button>
-          </div>
-
-          {/* CLOUDS */}
-          <div className="absolute bottom-0 left-0 w-full h-16">
-            <Clouds />
-          </div>
+        <div className="h-40 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-500 text-white p-6 shadow-md">
+          <h1 className="text-4xl font-bold">$0</h1>
+          <p className="text-sm opacity-90 mt-2">
+            Wallet Balance · USD
+          </p>
         </div>
       </div>
 
-      {/* EMPTY SPACE / CONTENT AREA */}
-      <div className="mt-10 px-4 text-center text-gray-500 text-sm">
-        No transactions available
+      {/* ACTION BUTTONS */}
+      <div className="px-4 mt-6 grid grid-cols-3 gap-4">
+        <ActionCard
+          icon="💰"
+          title="Exchange"
+          subtitle="Convert coins"
+        />
+        <ActionCard
+          icon="✉️"
+          title="Transfer"
+          subtitle="Send money"
+        />
+        <ActionCard
+          icon="🏦"
+          title="Withdraw"
+          subtitle="Bank withdrawal"
+        />
+      </div>
+
+      {/* RECENT ACTIVITY */}
+      <div className="px-4 mt-8">
+        <h2 className="font-semibold text-gray-800 mb-3">
+          Recent Activity
+        </h2>
+
+        <div className="bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-sm">
+          <div className="text-4xl mb-4 text-gray-300">⏳</div>
+          <p className="font-medium text-gray-700">
+            No records yet
+          </p>
+          <p className="text-sm text-gray-500 mt-1">
+            Make your first transfer
+          </p>
+        </div>
       </div>
     </div>
   );
 }
 
-/* ================= CLOUD SVG ================= */
+/* ================= ACTION CARD ================= */
 
-const Clouds = () => (
-  <svg
-    viewBox="0 0 375 80"
-    preserveAspectRatio="none"
-    className="w-full h-full"
-  >
-    <path
-      d="M0,40 
-         C40,10 80,10 120,40 
-         C160,70 200,70 240,40 
-         C280,10 320,10 375,40 
-         L375,80 L0,80 Z"
-      fill="#eef2ff"
-    />
-  </svg>
+const ActionCard = ({ icon, title, subtitle }) => (
+  <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
+    <div className="text-3xl mb-2">{icon}</div>
+    <p className="font-medium text-gray-800">{title}</p>
+    <p className="text-xs text-gray-500 mt-1">{subtitle}</p>
+  </div>
 );

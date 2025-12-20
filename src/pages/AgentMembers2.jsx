@@ -1,16 +1,17 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 
 export default function AgentMembers2() {
   const navigate = useNavigate();
+  const { agentId } = useParams(); // comes from /agent-members/:agentId
 
-  const goToDetail = (id, type) => {
-    navigate(`/agent/${id}/${type}`);
+  const goToMetric = (type) => {
+    navigate(`/agent-members/${agentId}/${type}`);
   };
 
   return (
     <div className="max-w-[430px] mx-auto min-h-screen bg-indigo-100">
-      <PageHeader title="Agent Members" />
+      <PageHeader title="Team Members" />
 
       {/* SEARCH */}
       <div className="px-4 mt-4">
@@ -25,12 +26,10 @@ export default function AgentMembers2() {
 
       {/* LIST */}
       <div className="p-4 space-y-4">
-        {AgentMembers2.map((m) => (
-          <div
-            key={m.id}
-            className="bg-white rounded-2xl p-4 shadow-sm"
-          >
+        {agentMembers.map((m) => (
+          <div key={m.id} className="bg-white rounded-2xl p-4 shadow-sm">
             <div className="flex items-center gap-3">
+
               <img
                 src={m.avatar}
                 alt={m.name}
@@ -38,22 +37,21 @@ export default function AgentMembers2() {
               />
 
               <div className="flex-1">
-                <p className="font-semibold text-gray-800">{m.name}</p>
+                <p className="font-semibold">{m.name}</p>
                 <p className="text-sm text-gray-400">ID: {m.id}</p>
               </div>
 
-              {/* RIGHT */}
               <div className="flex flex-col items-end gap-2">
                 <div className="flex gap-2">
                   <button
-                    onClick={() => goToDetail(m.id, "host")}
+                    onClick={() => goToMetric("host")}
                     className="px-3 py-1 rounded-full border border-purple-500 text-purple-500 text-sm"
                   >
                     Host: {m.host}
                   </button>
 
                   <button
-                    onClick={() => goToDetail(m.id, "coins")}
+                    onClick={() => goToMetric("coins")}
                     className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm"
                   >
                     🪙 {m.coins}
@@ -61,7 +59,7 @@ export default function AgentMembers2() {
                 </div>
 
                 <button
-                  onClick={() => goToDetail(m.id, "total")}
+                  onClick={() => goToMetric("total")}
                   className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm"
                 >
                   Total: {m.total}
