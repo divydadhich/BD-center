@@ -38,49 +38,14 @@ const agentMembers = [
     total: "375$",
     month: "2025-12",
   },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "✝Ghwāhi",
-    avatar: "https://i.pravatar.cc/100?img=12",
-    id: "2474047",
-    host: 17,
-    coins: "3.25M",
-    total: "375$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "✝Ghwāhi",
-    avatar: "https://i.pravatar.cc/100?img=12",
-    id: "2474047",
-    host: 17,
-    coins: "3.25M",
-    total: "375$",
-    month: "2025-12",
-  },
 ];
 
 export default function AgentMember() {
   const navigate = useNavigate();
 
-  const goToMetric = (agentId, type) => {
-    navigate(`/agent-members/${agentId}/${type}`);
+  // 🔹 Navigate to AgentList page
+  const goToAgentList = (type) => {
+    navigate(`/agents?type=${type}`);
   };
 
   return (
@@ -88,15 +53,18 @@ export default function AgentMember() {
       <PageHeader title="Agent List" />
 
       <div className="p-4 space-y-4">
-        {agentMembers.map((m) => (
-          <div key={m.id} className="bg-white rounded-2xl p-4 shadow-sm">
+        {agentMembers.map((m, index) => (
+          <div
+            key={`${m.id}-${index}`}
+            className="bg-white rounded-2xl p-4 shadow-sm"
+          >
             <div className="flex items-center gap-3">
 
               {/* Avatar */}
               <img
                 src={m.avatar}
                 alt={m.name}
-                className="w-12 h-12 rounded-full"
+                className="w-12 h-12 rounded-full object-cover"
               />
 
               {/* Info */}
@@ -105,27 +73,27 @@ export default function AgentMember() {
                 <p className="text-sm text-gray-400">ID: {m.id}</p>
               </div>
 
-              {/* Buttons */}
+              {/* Metrics */}
               <div className="flex flex-col items-end gap-2">
                 <div className="flex gap-2">
                   <button
-                    onClick={() => goToMetric(m.id, "host")}
-                    className="px-3 py-1 rounded-full border border-purple-500 text-purple-500 text-sm"
+                    onClick={() => goToAgentList("host")}
+                    className="px-3 py-1 rounded-full border border-purple-500 text-purple-500 text-sm active:scale-95 transition"
                   >
                     Host: {m.host}
                   </button>
 
                   <button
-                    onClick={() => goToMetric(m.id, "coins")}
-                    className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm"
+                    onClick={() => goToAgentList("coins")}
+                    className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm active:scale-95 transition"
                   >
                     🪙 {m.coins}
                   </button>
                 </div>
 
                 <button
-                  onClick={() => goToMetric(m.id, "total")}
-                  className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm"
+                  onClick={() => goToAgentList("total")}
+                  className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm active:scale-95 transition"
                 >
                   Total: {m.total}
                 </button>
