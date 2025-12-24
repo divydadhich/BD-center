@@ -8,25 +8,33 @@ export default function TeammateWorkDetailsSheet({ open, onClose }) {
   const [translateY, setTranslateY] = useState(0);
   const [dragging, setDragging] = useState(false);
 
+  /* ================= LOCK BACKGROUND SCROLL ================= */
   useEffect(() => {
     if (open) {
+      document.body.style.overflow = "hidden";
       setTranslateY(0);
+    } else {
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   if (!open) return null;
 
-  /* ================= TOUCH HANDLERS ================= */
+  /* ================= POINTER EVENTS (BEST FOR MOBILE) ================= */
 
-  const onTouchStart = (e) => {
-    startY.current = e.touches[0].clientY;
+  const onPointerDown = (e) => {
+    startY.current = e.clientY;
     setDragging(true);
   };
 
-  const onTouchMove = (e) => {
+  const onPointerMove = (e) => {
     if (!dragging) return;
 
-    currentY.current = e.touches[0].clientY;
+    currentY.current = e.clientY;
     const diff = currentY.current - startY.current;
 
     if (diff > 0) {
@@ -34,7 +42,7 @@ export default function TeammateWorkDetailsSheet({ open, onClose }) {
     }
   };
 
-  const onTouchEnd = () => {
+  const onPointerUp = () => {
     setDragging(false);
 
     if (translateY > 120) {
@@ -58,16 +66,18 @@ export default function TeammateWorkDetailsSheet({ open, onClose }) {
           ref={sheetRef}
           style={{
             transform: `translateY(${translateY}px)`,
-            transition: dragging ? "none" : "transform 0.3s ease",
+            transition: dragging ? "none" : "transform 0.25s ease",
+            touchAction: "none", // ⭐ VERY IMPORTANT
           }}
           className="w-full max-w-[420px] bg-white rounded-t-3xl p-4"
         >
-          {/* DRAG HANDLE */}
+          {/* DRAG HANDLE (ONLY THIS IS DRAGGABLE) */}
           <div
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-            className="w-full flex justify-center py-2 cursor-grab active:cursor-grabbing"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+            className="w-full flex justify-center py-3 cursor-grab active:cursor-grabbing"
           >
             <div className="w-12 h-1.5 bg-gray-300 rounded-full" />
           </div>
@@ -131,7 +141,7 @@ export default function TeammateWorkDetailsSheet({ open, onClose }) {
             </div>
           ))}
 
-          {/* CLOSE BUTTON */}
+          {/* CLOSE */}
           <button
             onClick={onClose}
             className="mt-4 w-full py-3 rounded-xl bg-gray-100 font-medium"
