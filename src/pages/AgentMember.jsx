@@ -11,13 +11,14 @@ const agentMembers = [
     total: "0$",
     month: "2025-12",
   },
+  
   {
-    name: "✝Ghwāhi",
-    avatar: "https://i.pravatar.cc/100?img=12",
-    id: "2474047",
-    host: 17,
-    coins: "3.25M",
-    total: "375$",
+    name: "꧁Deep꧂",
+    avatar: "https://i.pravatar.cc/100?img=11",
+    id: "1007681",
+    host: 1,
+    coins: "0",
+    total: "0$",
     month: "2025-12",
   },
   {
@@ -29,15 +30,55 @@ const agentMembers = [
     total: "0$",
     month: "2025-12",
   },
+  
   {
-    name: "✝Ghwāhi",
-    avatar: "https://i.pravatar.cc/100?img=12",
-    id: "2474047",
-    host: 17,
-    coins: "3.25M",
-    total: "375$",
+    name: "꧁Deep꧂",
+    avatar: "https://i.pravatar.cc/100?img=11",
+    id: "1007681",
+    host: 1,
+    coins: "0",
+    total: "0$",
     month: "2025-12",
   },
+  {
+    name: "꧁Deep꧂",
+    avatar: "https://i.pravatar.cc/100?img=11",
+    id: "1007681",
+    host: 1,
+    coins: "0",
+    total: "0$",
+    month: "2025-12",
+  },
+  
+  {
+    name: "꧁Deep꧂",
+    avatar: "https://i.pravatar.cc/100?img=11",
+    id: "1007681",
+    host: 1,
+    coins: "0",
+    total: "0$",
+    month: "2025-12",
+  },
+  {
+    name: "꧁Deep꧂",
+    avatar: "https://i.pravatar.cc/100?img=11",
+    id: "1007681",
+    host: 1,
+    coins: "0",
+    total: "0$",
+    month: "2025-12",
+  },
+  
+  {
+    name: "꧁Deep꧂",
+    avatar: "https://i.pravatar.cc/100?img=11",
+    id: "1007681",
+    host: 1,
+    coins: "0",
+    total: "0$",
+    month: "2025-12",
+  },
+ 
 ];
 
 export default function AgentMember() {
