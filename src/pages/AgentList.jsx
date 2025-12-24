@@ -19,65 +19,72 @@ export default function AgentList() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [hasMore, setHasMore] = useState(true);
-  const [openSheet, setOpenSheet] = useState(false); // 👈 NEW
+  const [openSheet, setOpenSheet] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#e8f0ff] flex justify-center">
-      <div className="w-full max-w-[390px]">
+      {/* Responsive container */}
+      <div className="w-full max-w-[420px] sm:max-w-[480px] md:max-w-[520px]">
 
-         {/* HEADER */}
-      <PageHeader title="Agent List" />
-
+        {/* HEADER */}
+        <PageHeader title="Agent List" />
 
         {/* SEARCH */}
-        <div className="px-4 mt-4">
+        <div className="px-3 sm:px-4 mt-4">
           <div className="flex items-center bg-white rounded-full px-4 py-3 shadow">
             <span className="text-gray-400 mr-2">🔍</span>
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Please enter an account"
-              className="w-full outline-none text-sm"
+              className="w-full outline-none text-sm sm:text-base"
             />
           </div>
         </div>
 
         {/* MEMBER LIST */}
-        <div className="px-4 mt-4 space-y-4">
+        <div className="px-3 sm:px-4 mt-4 space-y-4">
           {members.map((m, i) => (
-            <div key={i} className="bg-white rounded-2xl p-4 shadow-md">
-              <div className="flex items-center justify-between">
+            <div
+              key={i}
+              className="bg-white rounded-2xl p-4 shadow-md"
+            >
+              <div className="flex items-start justify-between gap-3">
 
                 {/* LEFT */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
                   <img
                     src={m.avatar}
                     alt="avatar"
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover"
                   />
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="font-semibold">{m.name}</p>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-semibold text-sm sm:text-base truncate">
+                        {m.name}
+                      </p>
                       <span className="px-2 py-0.5 text-xs rounded-full bg-red-400 text-white">
                         {m.role}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-400">ID: {m.id}</p>
+                    <p className="text-xs sm:text-sm text-gray-400 truncate">
+                      ID: {m.id}
+                    </p>
                   </div>
                 </div>
 
-                {/* RIGHT (CLICKABLE) */}
-                <div className="flex gap-2">
+                {/* RIGHT */}
+                <div className="flex flex-col-2 sm:flex-row gap-2 shrink-0">
                   <button
                     onClick={() => setOpenSheet(true)}
-                    className="px-3 py-1 rounded-full border border-purple-400 text-purple-500 text-sm flex items-center gap-1 active:scale-95"
+                    className="px-3 py-1 rounded-full border border-purple-400 text-purple-500 text-xs sm:text-sm flex items-center justify-center gap-1 active:scale-95"
                   >
                     🕒 {m.time}
                   </button>
 
                   <button
                     onClick={() => setOpenSheet(true)}
-                    className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-sm flex items-center gap-1 active:scale-95"
+                    className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-xs sm:text-sm flex items-center justify-center gap-1 active:scale-95"
                   >
                     🪙 {m.coins}
                   </button>
@@ -85,7 +92,7 @@ export default function AgentList() {
               </div>
 
               {/* FOOTER */}
-              <div className="flex justify-end mt-2 text-sm text-gray-400">
+              <div className="flex justify-end mt-2 text-xs sm:text-sm text-gray-400">
                 {m.month}
               </div>
             </div>
@@ -97,12 +104,14 @@ export default function AgentList() {
           {hasMore ? (
             <button
               onClick={() => setHasMore(false)}
-              className="text-blue-500 font-medium"
+              className="text-blue-500 font-medium text-sm sm:text-base"
             >
               Load more
             </button>
           ) : (
-            <p className="text-gray-400 font-medium">No more data</p>
+            <p className="text-gray-400 font-medium text-sm sm:text-base">
+              No more data
+            </p>
           )}
         </div>
 
@@ -111,7 +120,6 @@ export default function AgentList() {
           open={openSheet}
           onClose={() => setOpenSheet(false)}
         />
-
       </div>
     </div>
   );
