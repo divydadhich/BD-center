@@ -5,7 +5,7 @@ export default function Invite() {
   const [hostId, setHostId] = useState("");
 
   return (
-    <div className="max-w-[430px] mx-auto min-h-screen bg-indigo-100">
+    <div className="max-w-[430px] mx-auto min-h-screen bg-white">
       {/* HEADER */}
       <PageHeader title="Invite Members" />
 
@@ -20,7 +20,7 @@ export default function Invite() {
         </div> */}
 
         {/* FORM CARD */}
-        <div className="bg-white rounded-2xl p-5 shadow-sm">
+        <div className="bg-white rounded-2xl p-5 shadow-md">
           <h3 className="text-gray-800 font-medium mb-3">
             Host account:
           </h3>

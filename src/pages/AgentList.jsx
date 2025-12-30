@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MemberActionSheet from "../components/MemberActionSheet";
 import PageHeader from "../components/PageHeader";
@@ -16,83 +15,101 @@ const members = [
 ];
 
 export default function AgentList() {
-  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [openSheet, setOpenSheet] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#e8f0ff] flex justify-center">
-      {/* Responsive container */}
-      <div className="w-full max-w-[420px] sm:max-w-[480px] md:max-w-[520px]">
+    <div className="min-h-screen bg-white flex justify-center">
+      <div className="w-full max-w-[420px]">
 
         {/* HEADER */}
         <PageHeader title="Agent List" />
 
         {/* SEARCH */}
-        <div className="px-3 sm:px-4 mt-4">
-          <div className="flex items-center bg-white rounded-full px-4 py-3 shadow">
-            <span className="text-gray-400 mr-2">🔍</span>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Please enter an account"
-              className="w-full outline-none text-sm sm:text-base"
-            />
-          </div>
+        <div className="px-4 mt-4">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search agent or ID"
+            className="
+              w-full h-12
+              rounded-xl
+              border border-gray-200
+              px-4
+              text-sm
+              outline-none
+              focus:ring-2 focus:ring-purple-500
+            "
+          />
         </div>
 
-        {/* MEMBER LIST */}
-        <div className="px-3 sm:px-4 mt-4 space-y-4">
+        {/* LIST */}
+        <div className="px-4 mt-5 space-y-4">
           {members.map((m, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-4 shadow-md"
+              className="border border-gray-200 rounded-2xl overflow-hidden"
             >
-              <div className="flex items-start justify-between gap-3">
+              {/* TOP ROW */}
+              <div className="flex items-center gap-4 p-4">
+                <img
+                  src={m.avatar}
+                  alt="avatar"
+                  className="w-12 h-12 rounded-full object-cover"
+                />
 
-                {/* LEFT */}
-                <div className="flex items-center gap-3 min-w-0">
-                  <img
-                    src={m.avatar}
-                    alt="avatar"
-                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover"
-                  />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-semibold text-sm sm:text-base truncate">
-                        {m.name}
-                      </p>
-                      <span className="px-2 py-0.5 text-xs rounded-full bg-red-400 text-white">
-                        {m.role}
-                      </span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-gray-400 truncate">
-                      ID: {m.id}
-                    </p>
-                  </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-gray-900">
+                    {m.name}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    ID: {m.id}
+                  </p>
                 </div>
 
-                {/* RIGHT */}
-                <div className="flex flex-col-2 sm:flex-row gap-2 shrink-0">
-                  <button
-                    onClick={() => setOpenSheet(true)}
-                    className="px-3 py-1 rounded-full border border-purple-400 text-purple-500 text-xs sm:text-sm flex items-center justify-center gap-1 active:scale-95"
-                  >
-                    🕒 {m.time}
-                  </button>
+                <span className="px-3 py-1 text-xs rounded-full bg-purple-100 text-purple-600">
+                  {m.role}
+                </span>
+              </div>
 
-                  <button
-                    onClick={() => setOpenSheet(true)}
-                    className="px-3 py-1 rounded-full border border-orange-400 text-orange-500 text-xs sm:text-sm flex items-center justify-center gap-1 active:scale-95"
-                  >
-                    🪙 {m.coins}
-                  </button>
-                </div>
+              {/* DIVIDER */}
+              <div className="h-px bg-gray-200" />
+
+              {/* ACTION ROW (DIFFERENT PART) */}
+              <div className="grid grid-cols-2">
+                <button
+                  onClick={() => setOpenSheet(true)}
+                  className="
+                    py-3
+                    text-sm
+                    font-medium
+                    text-purple-600
+                    hover:bg-purple-50
+                    transition
+                  "
+                >
+                  ⏱ Time: {m.time}
+                </button>
+
+                <button
+                  onClick={() => setOpenSheet(true)}
+                  className="
+                    py-3
+                    text-sm
+                    font-medium
+                    text-orange-600
+                    hover:bg-orange-50
+                    transition
+                    border-l
+                  "
+                >
+                  🪙 Coins: {m.coins}
+                </button>
               </div>
 
               {/* FOOTER */}
-              <div className="flex justify-end mt-2 text-xs sm:text-sm text-gray-400">
+              <div className="px-4 py-2 text-right text-xs text-gray-400">
                 {m.month}
               </div>
             </div>
@@ -104,18 +121,18 @@ export default function AgentList() {
           {hasMore ? (
             <button
               onClick={() => setHasMore(false)}
-              className="text-blue-500 font-medium text-sm sm:text-base"
+              className="text-purple-600 font-medium text-sm"
             >
               Load more
             </button>
           ) : (
-            <p className="text-gray-400 font-medium text-sm sm:text-base">
+            <p className="text-gray-400 text-sm">
               No more data
             </p>
           )}
         </div>
 
-        {/* BOTTOM POPUP */}
+        {/* BOTTOM SHEET */}
         <MemberActionSheet
           open={openSheet}
           onClose={() => setOpenSheet(false)}

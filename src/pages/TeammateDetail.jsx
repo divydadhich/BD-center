@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TeammateWorkDetailsSheet from "../components/TeammateWorkDetailsSheet";
 import PageHeader from "../components/PageHeader";
@@ -39,104 +38,95 @@ const workHistory = [
 ];
 
 export default function TeammateDetail() {
-  const navigate = useNavigate();
   const [openSheet, setOpenSheet] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#e8f0ff] flex justify-center">
+    <div className="min-h-screen bg-white flex justify-center">
       <div className="w-full max-w-[390px]">
 
-       {/* HEADER */}
-      <PageHeader title="Teammate Details" />
+        {/* HEADER */}
+        <PageHeader title="Teammate Details" />
 
-        {/* PROFILE */}
+        {/* PROFILE HEADER (DIFFERENT) */}
         <div className="px-4 mt-4">
-          <div className="bg-white rounded-2xl p-4 flex items-center gap-3 shadow">
+          <div className="flex items-center gap-4 border border-gray-200 rounded-2xl p-4">
             <img
               src="https://i.pravatar.cc/100?img=11"
               alt="avatar"
-              className="w-12 h-12 rounded-full object-cover"
+              className="w-14 h-14 rounded-full object-cover"
             />
-            <div>
+
+            <div className="flex-1">
               <div className="flex items-center gap-2">
-                <p className="font-semibold">꧁Deep꧂</p>
-                <span className="px-2 py-0.5 text-xs rounded-full bg-red-400 text-white">
+                <p className="font-semibold text-gray-900">
+                  ꧁Deep꧂
+                </p>
+                <span className="px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-600">
                   Agent
                 </span>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-500 mt-1">
                 ID: 1007681
               </p>
             </div>
           </div>
         </div>
 
-        {/* WORK HISTORY */}
-        <div className="px-4 mt-4 space-y-4 pb-8">
+        {/* WORK HISTORY – TIMELINE STYLE */}
+        <div className="px-4 mt-6 pb-8 space-y-6">
           {workHistory.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-4 shadow"
-            >
-              {/* TOP */}
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-blue-500 font-semibold">
-                  {item.month}
-                </p>
-                <span className="px-3 py-1 rounded-full bg-emerald-500 text-white text-sm">
-                  {item.status}
-                </span>
+            <div key={index} className="relative pl-6">
+
+              {/* TIMELINE DOT */}
+              <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-purple-500" />
+              <div className="absolute left-[5px] top-4 bottom-0 w-px bg-gray-200" />
+
+              {/* CONTENT */}
+              <div className="border border-gray-200 rounded-xl p-4">
+                {/* TOP */}
+                <div className="flex items-center justify-between mb-3">
+                  <p className="font-medium text-gray-900">
+                    {item.month}
+                  </p>
+                  <span className="text-xs px-3 py-1 rounded-full bg-green-100 text-green-600">
+                    {item.status}
+                  </span>
+                </div>
+
+                {/* DETAILS */}
+                <div className="space-y-2 text-sm text-gray-600">
+                  <Row label="Target" value={item.target} />
+                  <Row label="Duration" value={item.duration} />
+                  <Row label="Target Level" value={item.level} />
+                  <Row label="Salary" value={item.salary} />
+                </div>
+
+                {/* ACTION */}
+                <button
+                  onClick={() => setOpenSheet(true)}
+                  className="mt-4 text-sm font-medium text-purple-600"
+                >
+                  View details →
+                </button>
               </div>
-
-              {/* DETAILS */}
-              <div className="grid grid-cols-2 gap-y-3 text-sm">
-                <p className="text-gray-600">
-                  Target:
-                  <span className="ml-2 text-orange-500 font-semibold">
-                    {item.target}
-                  </span>
-                </p>
-
-                <p className="text-gray-600 text-right">
-                  Duration:
-                  <span className="ml-2 text-orange-500 font-semibold">
-                    {item.duration}
-                  </span>
-                </p>
-
-                <p className="text-gray-600">
-                  Target LV:
-                  <span className="ml-2 text-orange-500 font-semibold">
-                    {item.level}
-                  </span>
-                </p>
-
-                <p className="text-gray-600 text-right">
-                  Salary:
-                  <span className="ml-2 text-orange-500 font-semibold">
-                    {item.salary}
-                  </span>
-                </p>
-              </div>
-
-              {/* SEE MORE */}
-              <button
-                onClick={() => setOpenSheet(true)}
-                className="mt-4 w-full text-center text-blue-500 text-sm font-medium"
-              >
-                See more details&gt;&gt;
-              </button>
             </div>
           ))}
         </div>
 
-        {/* BOTTOM DETAILS POPUP */}
+        {/* BOTTOM SHEET */}
         <TeammateWorkDetailsSheet
           open={openSheet}
           onClose={() => setOpenSheet(false)}
         />
-
       </div>
     </div>
   );
 }
+
+/* SMALL HELPER */
+const Row = ({ label, value }) => (
+  <div className="flex justify-between">
+    <span>{label}</span>
+    <span className="font-medium text-gray-900">{value}</span>
+  </div>
+);
