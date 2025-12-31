@@ -101,13 +101,14 @@ export default function TeammateDetail() {
                   <Row label="Salary" value={item.salary} />
                 </div>
 
-                {/* ACTION */}
-                <button
-                  onClick={() => setOpenSheet(true)}
-                  className="mt-4 text-sm font-medium text-purple-600"
-                >
-                  View details →
-                </button>
+                <div className="mt-4 flex justify-center">
+  <button
+    onClick={() => setOpenSheet(true)}
+    className="text-sm font-medium text-purple-600"
+  >
+    View details →
+  </button>
+</div>
               </div>
             </div>
           ))}

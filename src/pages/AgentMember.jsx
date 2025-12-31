@@ -1,116 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 
-const agentMembers = [
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-   {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-   {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-   {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-   {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-   {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-  {
-    name: "꧁Deep꧂",
-    avatar: "https://i.pravatar.cc/100?img=11",
-    id: "1007681",
-    host: 1,
-    coins: "0",
-    total: "0$",
-    month: "2025-12",
-  },
-];
+const agentMembers = Array(10).fill({
+  name: "꧁Deep꧂",
+  avatar: "https://i.pravatar.cc/100?img=11",
+  id: "1007681",
+  host: 1,
+  coins: "0",
+  total: "0$",
+  month: "2025-12",
+});
 
 export default function AgentMember() {
   const navigate = useNavigate();
@@ -120,91 +19,88 @@ export default function AgentMember() {
   };
 
   return (
-    <div className="max-w-[430px] mx-auto min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen w-full bg-white overflow-x-hidden">
       {/* HEADER */}
       <PageHeader title="Agent Members" />
 
-      {/* CONTENT */}
-      <div className="px-4 py-2 divide-y">
+      {/* LIST */}
+      <div className="px-4 py-4 sm:max-w-[430px] sm:mx-auto space-y-6">
         {agentMembers.map((m, index) => (
-          <div
-            key={`${m.id}-${index}`}
-            className="py-4 flex gap-4 items-center"
-          >
-            {/* AVATAR */}
-            <img
-              src={m.avatar}
-              alt={m.name}
-              className="w-12 h-12 rounded-full object-cover flex-shrink-0"
-            />
+          <div key={index} className="space-y-3">
 
-            {/* CENTER INFO */}
-            <div className="flex-1">
-              <p className="font-semibold">{m.name}</p>
-              <p className="text-xs text-gray-500">
-                ID: {m.id}
+            {/* ===== MAIN CARD (CENTER CONTENT) ===== */}
+            <div className="bg-white rounded-2xl p-5 shadow-md text-center">
+              <img
+                src={m.avatar}
+                alt={m.name}
+                className="w-14 h-14 rounded-full mx-auto mb-3"
+              />
+
+              <p className="font-semibold text-gray-900 text-[16px]">
+                {m.name}
               </p>
-              <p className="text-xs text-gray-400 mt-1">
+
+              <p className="text-xs text-gray-500 mt-1">
+                ID · {m.id}
+              </p>
+
+              <p className="text-[11px] text-gray-400 mt-1">
                 {m.month}
               </p>
             </div>
 
-            {/* RIGHT BUTTONS (IMPROVED) */}
-            <div className="flex flex-col gap-2 text-xs text-right">
-              <button
+            {/* ===== ACTION BUTTONS (OUTSIDE CARD) ===== */}
+            <div className="flex justify-between gap-2">
+              <ActionButton
+                label={`Hosts ${m.host}`}
+                color="purple"
                 onClick={() => goToAgentList("host")}
-                className="
-                  px-3 py-1.5
-                  rounded-xl
-                  bg-purple-50
-                  text-purple-600
-                  font-medium
-                  ring-1 ring-purple-200
-                  hover:bg-purple-100
-                  active:scale-95
-                  transition
-                "
-              >
-                Hosts · {m.host}
-              </button>
-
-              <button
+              />
+              <ActionButton
+                label={`Coins ${m.coins}`}
+                color="orange"
                 onClick={() => goToAgentList("coins")}
-                className="
-                  px-3 py-1.5
-                  rounded-xl
-                  bg-orange-50
-                  text-orange-600
-                  font-medium
-                  ring-1 ring-orange-200
-                  hover:bg-orange-100
-                  active:scale-95
-                  transition
-                "
-              >
-                Coins · {m.coins}
-              </button>
-
-              <button
+              />
+              <ActionButton
+                label={`Total ${m.total}`}
+                color="green"
                 onClick={() => goToAgentList("total")}
-                className="
-                  px-3 py-1.5
-                  rounded-xl
-                  bg-green-50
-                  text-green-600
-                  font-medium
-                  ring-1 ring-green-200
-                  hover:bg-green-100
-                  active:scale-95
-                  transition
-                "
-              >
-                Total · {m.total}
-              </button>
+              />
             </div>
+
           </div>
         ))}
       </div>
     </div>
+  );
+}
+
+/* ===== BUTTON COMPONENT ===== */
+
+function ActionButton({ label, color, onClick }) {
+  const styles = {
+    purple: "bg-purple-50 text-purple-600 ring-purple-200",
+    orange: "bg-orange-50 text-orange-600 ring-orange-200",
+    green: "bg-green-50 text-green-600 ring-green-200",
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        flex-1
+        py-2
+        rounded-xl
+        text-xs
+        font-medium
+        ring-1
+        ${styles[color]}
+        hover:opacity-90
+        active:scale-95
+        transition
+      `}
+    >
+      {label}
+    </button>
   );
 }

@@ -2,7 +2,7 @@ import PageHeader from "../components/PageHeader";
 
 export default function Wallet() {
   return (
-    <div className="max-w-[430px] mx-auto min-h-screen bg-gray-100">
+    <div className="max-w-[430px] mx-auto min-h-screen bg-white">
 
       {/* HEADER */}
       <PageHeader title="Balance" />
@@ -42,7 +42,7 @@ export default function Wallet() {
           Recent Activity
         </h2>
 
-        <div className="bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-sm">
+        <div className="bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-md">
           <div className="text-4xl mb-4 text-gray-300">⏳</div>
           <p className="font-medium text-gray-700">
             No records yet
@@ -59,7 +59,7 @@ export default function Wallet() {
 /* ================= ACTION CARD ================= */
 
 const ActionCard = ({ icon, title, subtitle }) => (
-  <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
+  <div className="bg-white rounded-2xl p-4 text-center shadow-md">
     <div className="text-3xl mb-2">{icon}</div>
     <p className="font-medium text-gray-800">{title}</p>
     <p className="text-xs text-gray-500 mt-1">{subtitle}</p>
